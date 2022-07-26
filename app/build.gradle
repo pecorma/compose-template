@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.plugin.serialization'
+}
+
+android {
+    namespace 'com.mjpecora.app.composetemplate'
+
+    defaultConfig {
+        applicationId "com.mjpecora.app.composetemplate"
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlinOptions.jvmTarget = rootProject.ext.jvmTarget
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
+    }
+}
+
+dependencies {
+    implementation("androidx.core:core-ktx:${versions.corektx}")
+
+    /** compose dependencies */
+    implementation("androidx.compose.ui:ui:${versions.compose}")
+    implementation("androidx.compose.material:material:${versions.compose}")
+    implementation("androidx.compose.ui:ui-tooling-preview:${versions.compose}")
+    implementation("io.coil-kt:coil-compose:${versions.coil}")
+    implementation("androidx.compose.foundation:foundation:${versions.compose}")
+    implementation("androidx.compose.foundation:foundation-layout:${versions.compose}")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:${versions.accompanist}")
+    implementation("androidx.compose.compiler:compiler:1.2.0")
+    implementation("androidx.compose.runtime:runtime:${versions.compose}")
+    implementation("androidx.paging:paging-compose:${versions.paging}")
+
+    /** networking dependencies */
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:${versions.okhttp}"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation("com.squareup.retrofit2:retrofit:${versions.retrofit}")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${versions.serialization}")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${versions.serializationConverter}")
+
+    /** dependency inject dependencies */
+    implementation("com.google.dagger:hilt-android:${versions.hilt}")
+    implementation("androidx.hilt:hilt-navigation-compose:${versions.hiltNavigation}")
+    kapt("com.google.dagger:hilt-compiler:${versions.hilt}")
+
+    /** coroutines dependencies */
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}")
+
+    /** lifecycle dependencies */
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}")
+}
